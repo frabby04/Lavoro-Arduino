@@ -17,7 +17,7 @@ LedControl lc = LedControl(7, 6, 5, 1);//Istanzia un oggetto della classe "LedCo
 
 void scrivi_S();
 
-void setup{
+void setup(){
     
     /*
     Richiamo il metodo ".shutdown(indiceDevice,statoDelLED)" per far uscire la matrice di LED dalla modalità di risparmio energetico.
@@ -51,12 +51,12 @@ void setup{
 }
 
 
-void loop{
+void loop(){
 //Nel metodo "loop" è racchiusa la parte di codice che descrive il comportamento del server.
     /*
     Quando un client si connette, inviando una richiesta HTTP, allora significa che sono presenti byte da leggere.
     */
-    Ethernet client = server.available();
+    EthernetClient client = server.available();
     if(client){
         Serial.println("Un client si è connesso");
         //Comincio ad effettuare un controllo sulla richiesta HTTP, assicurandomi che essa sia terminata.
@@ -66,7 +66,7 @@ void loop{
         */
         bool controlloRichiesta = true;   
         while(client.connected()){
-            if(client.available){
+            if(client.available()){
                 char c = client.read();
                 //Stampo la richiesta HTTP inviata dal client sul monitor seriale.
                 Serial.write(c);
@@ -91,16 +91,16 @@ void loop{
                     Dopo il CRLF, stampo il codice HTML che sarà contenuto nell'entity body della risposta.
                     */
                     client.println("<!DOCTYPE html>");
-                    client.println("<html lang="en">");
+                    client.println("<html lang=\"en\">");
                     client.println("<head>");
-                    client.println("<meta charset="UTF-8">");
-                    client.println("<meta http-equiv="X-UA-Compatible" content="IE=edge">");
-                    client.println("<meta name="viewport" content="width=device-width, initial-scale=1.0">");
+                    client.println("<meta charset=\"UTF-8\">");
+                    client.println("<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">");
+                    client.println("<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">");
                     client.println("<title>Home</title>");
                     client.println("</head>");
                     client.println("<body>");
-                    client.println("<h1 style="color: rgb(66, 66, 66); font-size: 80px; text-align: center;">La pagina è stata ricevuta</h1>");
-                    client.println("<p style="color: salmon; font-size: 40px; text-align: center;">Il Led mostra la lettera 'S' che indica la parola 'sent'</p>");
+                    client.println("<h1 style=\"color: rgb(66, 66, 66); font-size: 80px; text-align: center;\">La pagina è stata ricevuta</h1>");
+                    client.println("<p style=\"color: salmon; font-size: 40px; text-align: center;\">Il Led mostra la lettera 'S' che indica la parola 'sent'</p>");
                     client.println("</body>");
                     client.println("</html>");
                     scrivi_S(); //Richiamo il metodo per mostrare la lettere S sulla matrice di LED.
@@ -131,12 +131,12 @@ void scrivi_S(){     //Metodo utilizzato accendere la matrice di LED in modo da 
             B10010001, 
             B01100001, 
             B00000000};
-        lc.setRow(0, 0, letter[0]);
-        lc.setRow(0, 1, letter[1]);
-        lc.setRow(0, 2, letter[2]);
-        lc.setRow(0, 3, letter[3]);
-        lc.setRow(0, 4, letter[4]);
-        lc.setRow(0, 5, letter[5]);
-        lc.setRow(0, 6, letter[6]);
-        lc.setRow(0, 7, letter[7]);
+        lc.setRow(0, 0, lettera[0]);
+        lc.setRow(0, 1, lettera[1]);
+        lc.setRow(0, 2, lettera[2]);
+        lc.setRow(0, 3, lettera[3]);
+        lc.setRow(0, 4, lettera[4]);
+        lc.setRow(0, 5, lettera[5]);
+        lc.setRow(0, 6, lettera[6]);
+        lc.setRow(0, 7, lettera[7]);
 }
